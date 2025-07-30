@@ -1,25 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { MainLayout } from "./components/mainLayout";
+import { materials, type materialsType } from "./entities/materials";
+import { Select } from "./components/select/select";
+import { Inputs } from "./components/inputs/inputs";
+import { useState } from "react";
+
+import "./styles.css";
 
 function App() {
+  const [selectedMaterial, setSelectedMaterial] = useState(materials[0]);
+  const [meterCost, setMeterCost] = useState(0);
+  const [cornerCost, setCornerCost] = useState(0);
+  const [volumeCost, setVolumeCost] = useState(0);
+  const totalCost = meterCost + cornerCost + volumeCost;
+  const expenses = (totalCost * 0.08).toFixed(2);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainLayout>
+      <h1>Именной калькулятор Ivan Loft</h1>
+      <Select
+        onChange={(material: materialsType) => setSelectedMaterial(material)}
+        materials={materials}
+      />
+      <Inputs
+        inputLabel="Кол-во погонных метров"
+        price={selectedMaterial.meterPrice}
+        setTotalCost={setMeterCost}
+        result={meterCost}
+      />
+      <Inputs
+        inputLabel="Работа (стыки)"
+        price={selectedMaterial.cornerPrice}
+        setTotalCost={setCornerCost}
+        result={cornerCost}
+      />
+      <Inputs
+        inputLabel="Объем изделия для покраски (м3)"
+        price={1000}
+        setTotalCost={setVolumeCost}
+        result={volumeCost}
+      />
+      <h2>Расходы (8%): {expenses} </h2>
+      <h2>Итоговая стоимость: {totalCost}</h2>
+    </MainLayout>
   );
 }
 
