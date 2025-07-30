@@ -13,6 +13,7 @@ function App() {
   const [volumeCost, setVolumeCost] = useState(0);
   const totalCost = meterCost + cornerCost + volumeCost;
   const expenses = (totalCost * 0.08).toFixed(2);
+  // 1
   return (
     <MainLayout>
       <h1>Именной калькулятор Ivan Loft</h1>
