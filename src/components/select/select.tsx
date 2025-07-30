@@ -1,14 +1,15 @@
-import type { Ref, SelectHTMLAttributes } from "react";
+import type { Ref } from "react";
 import type { materialsType } from "../../entities/materials";
 import "./styles.css";
 
-interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
+interface SelectProps {
   label?: string;
   ref?: Ref<HTMLSelectElement>;
   error?: string;
   hint?: string;
   materials: materialsType[];
   onChange: (material: materialsType) => void;
+  value: any;
 }
 
 export const Select = ({
@@ -19,7 +20,7 @@ export const Select = ({
   value,
   hint,
   materials,
-}: Props) => {
+}: SelectProps) => {
   const handleChange = (materialId: string) => {
     const material = materials.find((material) => material.id === +materialId);
     onChange(material!);

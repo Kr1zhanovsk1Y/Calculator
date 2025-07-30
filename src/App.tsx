@@ -17,6 +17,7 @@ function App() {
     <MainLayout>
       <h1>Именной калькулятор Ivan Loft</h1>
       <Select
+        value={selectedMaterial.id}
         onChange={(material: materialsType) => setSelectedMaterial(material)}
         materials={materials}
       />
